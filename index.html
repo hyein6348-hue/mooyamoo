@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUYAMU | 무야무 - 음악과 감성의 라이프스타일 커뮤니티</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            black: '#0A0C10',
+                            dark: '#12151D',
+                            card: '#181C26',
+                            beige: '#EADAD0',
+                            sand: '#D4B995',
+                            sandDark: '#C2A37A',
+                            gold: '#D1AC00',
+                            ocean: '#3F6683',
+                            terracotta: '#D34C1C',
+                            terracottaHover: '#B83E14'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Cinzel', 'Playfair Display', 'Noto Serif KR', 'serif'],
+                        sans: ['Pretendard', 'Noto Sans KR', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts: Cinzel, Playfair Display, Noto Serif KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Noto+Serif+KR:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #0A0C10;
+            color: #EADAD0;
+            font-family: 'Noto Serif KR', serif;
+            overflow-x: hidden;
+        }
+
+        .font-cinzel {
+            font-family: 'Cinzel', serif;
+        }
+
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Gold Gradient Text */
+        .text-gold-gradient {
+            background: linear-gradient(135deg, #F3ECE7 0%, #D4B995 50%, #C2A37A 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-terracotta-gradient {
+            background: linear-gradient(135deg, #EADAD0 0%, #D34C1C 70%, #B83E14 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Luxurious Card Glass Effect */
+        .luxury-glass {
+            background: rgba(24, 28, 38, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 185, 149, 0.22);
+        }
+
+        .luxury-border {
+            border: 1px solid rgba(212, 185, 149, 0.3);
+        }
+
+        /* Floating Image Animation */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(1deg); }
+        }
+        .animate-float {
+            animation: floatSlow 6s ease-in-out infinite;
+        }
+
+        /* Gold Pill Button Pulse */
+        .pill-btn-glow {
+            box-shadow: 0 0 20px rgba(211, 76, 28, 0.25);
+        }
+        .pill-btn-glow:hover {
+            box-shadow: 0 0 30px rgba(211, 76, 28, 0.5);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0A0C10;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2A3245;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4B995;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-terracotta selection:text-white">
+
+    <!-- Header Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-brand-black/80 backdrop-blur-md border-b border-brand-sand/10" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div class="flex items-center justify-between h-24">
+                
+                <!-- Left Nav Links -->
+                <nav class="hidden md:flex items-center gap-8 text-xs uppercase tracking-[0.25em] text-brand-beige/70 font-sans font-medium">
+                    <a href="#soul-stage" class="hover:text-brand-sand transition-colors py-2">Soul Stage</a>
+                    <a href="#busking" class="hover:text-brand-sand transition-colors py-2">Busking</a>
+                    <a href="#groups" class="hover:text-brand-sand transition-colors py-2">Gatherings</a>
+                </nav>
+
+                <!-- Center Brand Emblem Logo -->
+                <a href="#" class="flex flex-col items-center group">
+                    <div class="w-10 h-10 rounded-full border border-brand-sand/40 flex items-center justify-center text-brand-sand group-hover:border-brand-terracotta transition-colors duration-300 mb-1">
+                        <span class="font-cinzel text-xs font-black tracking-widest">MYM</span>
+                    </div>
+                    <span class="font-cinzel tracking-[0.35em] text-sm font-bold text-brand-beige group-hover:text-brand-sand transition-colors">MUYAMU</span>
+                </a>
+
+                <!-- Right Nav & RSVP CTA -->
+                <div class="flex items-center gap-6">
+                    <a href="#philosophy" class="hidden md:block text-xs uppercase tracking-[0.25em] text-brand-beige/70 hover:text-brand-sand transition-colors font-sans">Philosophy</a>
+                    
+                    <button onclick="openModal()" class="px-6 py-2.5 rounded-full border border-brand-sand/60 text-brand-beige text-xs uppercase tracking-[0.2em] font-sans font-semibold hover:bg-brand-terracotta hover:border-brand-terracotta hover:text-white transition-all duration-300 pill-btn-glow">
+                        입장 신청하기
+                    </button>
+
+                    <!-- Mobile Hamburger -->
+                    <button id="mobile-toggle" class="md:hidden text-brand-sand text-xl p-2" aria-label="Menu">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-dark/95 border-b border-brand-sand/20 px-8 py-6 space-y-4 font-sans text-xs uppercase tracking-widest">
+            <a href="#soul-stage" class="block text-brand-beige/80 py-2 border-b border-white/5">Soul Stage</a>
+            <a href="#busking" class="block text-brand-beige/80 py-2 border-b border-white/5">Busking & Festival</a>
+            <a href="#groups" class="block text-brand-beige/80 py-2 border-b border-white/5">Sub Gatherings</a>
+            <a href="#philosophy" class="block text-brand-beige/80 py-2 border-b border-white/5">Philosophy</a>
+            <a href="#contact" class="block text-brand-terracotta font-bold py-2">Join Us</a>
+        </div>
+    </header>
+
+    <!-- Hero Section (Vendredi Gourmand Inspired) -->
+    <section class="relative min-h-screen pt-36 pb-20 flex flex-col justify-center items-center text-center px-4 overflow-hidden">
+        
+        <!-- Top Centered Floating Circle Image -->
+        <div class="relative mb-8 animate-float">
+            <div class="w-44 h-44 sm:w-52 sm:h-52 rounded-full p-1 border border-brand-sand/40 shadow-2xl overflow-hidden mx-auto bg-brand-card">
+                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800&auto=format&fit=crop" alt="Acoustic Music" class="w-full h-full object-cover rounded-full filter brightness-90 hover:scale-110 transition-transform duration-700">
+            </div>
+            <!-- Glow background -->
+            <div class="absolute inset-0 bg-brand-sand/10 rounded-full blur-2xl -z-10"></div>
+        </div>
+
+        <!-- Main Title -->
+        <h1 class="font-cinzel text-4xl sm:text-6xl md:text-7xl font-bold tracking-[0.15em] text-gold-gradient uppercase mb-4 leading-tight">
+            MUYAMU COMMUNITY
+        </h1>
+
+        <div class="w-24 h-[1px] bg-gradient-to-r from-transparent via-brand-sand to-transparent mx-auto my-4"></div>
+
+        <!-- Handwritten Accent Subtitle -->
+        <p class="font-playfair italic text-lg sm:text-xl text-brand-sand/90 tracking-wide mb-6">
+            "순수한 소율과 안양천의 계절이 자라나는 문화 예술 커뮤니티"
+        </p>
+
+        <!-- Description Paragraph -->
+        <p class="max-w-xl mx-auto text-xs sm:text-sm text-brand-beige/70 font-sans leading-relaxed tracking-wider mb-10 font-light">
+            음악을 매개로 인연을 맺고, 따뜻한 피크닉 버스킹과 라이프스타일 소모임을 통해<br class="hidden sm:block">
+            일상 속에 깊은 울림과 쉼을 선사하는 안양의 시민 주도형 예술 공간입니다.
+        </p>
+
+        <!-- Hero Buttons -->
+        <div class="flex flex-col sm:flex-row items-center gap-4 z-10">
+            <a href="#soul-stage" class="px-8 py-3.5 rounded-full bg-brand-terracotta text-white text-xs uppercase tracking-[0.2em] font-sans font-semibold hover:bg-brand-terracottaHover transition-all shadow-lg shadow-brand-terracotta/30">
+                시그니처 스테이지 보기
+            </a>
+            <button onclick="openModal()" class="px-8 py-3.5 rounded-full border border-brand-sand/40 text-brand-sand hover:bg-brand-sand/10 text-xs uppercase tracking-[0.2em] font-sans transition-all">
+                멤버십 합류 안내
+            </button>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center opacity-60">
+            <span class="text-[10px] font-sans uppercase tracking-[0.3em] text-brand-sand mb-2">Scroll</span>
+            <div class="w-[1px] h-8 bg-gradient-to-b from-brand-sand to-transparent animate-pulse"></div>
+        </div>
+    </section>
+
+
+    <!-- Section 1: Interactive Carousel Showcase ("Special Theme / 소울 스테이지") -->
+    <section id="soul-stage" class="py-28 relative border-t border-brand-sand/10 bg-brand-dark">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            
+            <div class="text-center mb-16">
+                <span class="text-[11px] font-cinzel tracking-[0.3em] uppercase text-brand-terracotta block mb-2">Monthly Signature</span>
+                <h2 class="font-cinzel text-3xl sm:text-4xl text-brand-beige tracking-wider">SOUL STAGE Showcase</h2>
+                <p class="text-xs text-brand-sand/70 font-sans tracking-widest mt-2">월간 정기 감성 음악 발표회 & 아티스트 스토리</p>
+            </div>
+
+            <!-- Carousel Display Container -->
+            <div class="relative luxury-glass rounded-3xl p-6 sm:p-12 luxury-border overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <!-- Left Slide Thumbnails / Info -->
+                    <div class="lg:col-span-5 space-y-6 order-2 lg:order-1">
+                        <span class="inline-block px-3 py-1 rounded-full border border-brand-sand/40 text-brand-sand text-[10px] font-sans tracking-widest uppercase" id="slide-category">
+                            Monthly Live
+                        </span>
+                        
+                        <h3 class="font-cinzel text-2xl sm:text-3xl text-brand-beige leading-snug" id="slide-title">
+                            소울 스테이지 (Soul Stage)
+                        </h3>
+
+                        <p class="text-xs sm:text-sm text-brand-beige/80 font-sans leading-relaxed font-light" id="slide-desc">
+                            자신의 음악과 진솔한 이야기를 나눕니다. 관객과 연주자의 경계를 허물고, 서로의 완성을 다정하게 응원하는 무야무의 핵심 월간 프로그램입니다.
+                        </p>
+
+                        <div class="pt-4 flex items-center gap-4">
+                            <span class="text-xs font-sans text-brand-sand tracking-widest" id="slide-count">01 / 03</span>
+                            <div class="flex items-center gap-3">
+                                <button onclick="prevSlide()" class="w-10 h-10 rounded-full border border-brand-sand/30 flex items-center justify-center text-brand-sand hover:border-brand-terracotta hover:text-brand-terracotta transition-colors" aria-label="Previous">
+                                    <i class="fa-solid fa-chevron-left text-xs"></i>
+                                </button>
+                                <button onclick="nextSlide()" class="w-10 h-10 rounded-full border border-brand-sand/30 flex items-center justify-center text-brand-sand hover:border-brand-terracotta hover:text-brand-terracotta transition-colors" aria-label="Next">
+                                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Image Frame Section -->
+                    <div class="lg:col-span-7 relative order-1 lg:order-2">
+                        <div class="relative h-72 sm:h-96 rounded-2xl overflow-hidden luxury-border group">
+                            <img id="slide-img" src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1200&auto=format&fit=crop" alt="Soul Stage Live" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-90">
+                            
+                            <!-- Overlay Badge -->
+                            <div class="absolute bottom-4 right-4 bg-brand-black/80 backdrop-blur-md px-4 py-2 rounded-xl border border-brand-sand/20 text-right">
+                                <span class="block text-[10px] font-sans text-brand-sand uppercase tracking-wider">LOCATION</span>
+                                <span class="text-xs font-serif text-brand-beige" id="slide-loc">만안구 무야무 라운지</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Section 2: Parallax Dark Outdoor Events ("Seasonal Dishes / 안양천 피크닉 & 노고전") -->
+    <section id="busking" class="py-32 relative bg-brand-black overflow-hidden">
+        
+        <!-- Atmospheric Background Image with Gradient Overlay -->
+        <div class="absolute inset-0 opacity-20 pointer-events-none">
+            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=1600&auto=format&fit=crop" alt="Background Texture" class="w-full h-full object-cover">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+            
+            <!-- Section Header -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 border-b border-brand-sand/15 pb-8">
+                <div>
+                    <span class="text-[11px] font-cinzel tracking-[0.3em] uppercase text-brand-terracotta block mb-2">Outdoor & Festival</span>
+                    <h2 class="font-cinzel text-3xl sm:text-5xl text-brand-beige">안양천 수변 버스킹 & 노고전</h2>
+                </div>
+                <p class="text-xs text-brand-sand/80 font-sans tracking-widest mt-4 md:mt-0 max-w-md">
+                    돗자리를 펴고 나누는 어쿠스틱 피크닉 공연부터, 5월과 10월 감사의 마음을 담은 테마 헌정 무대까지.
+                </p>
+            </div>
+
+            <!-- Two-Column Grid Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Card 1: 노고전 -->
+                <div class="luxury-glass p-8 sm:p-10 rounded-3xl luxury-border relative group hover:border-brand-terracotta/50 transition-all duration-500">
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="w-12 h-12 rounded-full border border-brand-terracotta/40 flex items-center justify-center text-brand-terracotta font-cinzel text-sm">MAY/OCT</span>
+                        <span class="text-[10px] font-sans uppercase tracking-[0.2em] text-brand-sand bg-brand-black/60 px-3 py-1 rounded-full border border-brand-sand/20">헌정 버스킹</span>
+                    </div>
+
+                    <h3 class="font-cinzel text-2xl font-bold text-brand-beige mb-3 group-hover:text-brand-terracotta transition-colors">
+                        노고전 (NO-GO FESTIVAL)
+                    </h3>
+                    
+                    <p class="text-xs sm:text-sm text-brand-beige/70 font-sans leading-relaxed mb-8 font-light">
+                        매년 5월과 10월, 커뮤니티 회원들과 지역 시민들의 수고와 노고에 깊은 감사를 전하는 특별 헌정 공연입니다. 따스한 봄햇살과 가을 노을 아래 음악을 선사합니다.
+                    </p>
+
+                    <div class="h-48 rounded-2xl overflow-hidden luxury-border">
+                        <img src="https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80&w=800&auto=format&fit=crop" alt="노고전 버스킹" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                </div>
+
+                <!-- Card 2: 안양천 피크닉 버스킹 -->
+                <div class="luxury-glass p-8 sm:p-10 rounded-3xl luxury-border relative group hover:border-brand-sand/50 transition-all duration-500">
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="w-12 h-12 rounded-full border border-brand-sand/40 flex items-center justify-center text-brand-sand font-cinzel text-sm">SEASON</span>
+                        <span class="text-[10px] font-sans uppercase tracking-[0.2em] text-brand-sand bg-brand-black/60 px-3 py-1 rounded-full border border-brand-sand/20">분기별 피크닉</span>
+                    </div>
+
+                    <h3 class="font-cinzel text-2xl font-bold text-brand-beige mb-3 group-hover:text-brand-sand transition-colors">
+                        안양천 피크닉 버스킹
+                    </h3>
+                    
+                    <p class="text-xs sm:text-sm text-brand-beige/70 font-sans leading-relaxed mb-8 font-light">
+                        계절의 길목마다 안양천 수변공원에서 자발적으로 모여 피크닉을 즐기며 버스킹을 펼칩니다. 음악이 끝난 후 함께 안양천을 가꾸는 플로깅 활동을 병행합니다.
+                    </p>
+
+                    <div class="h-48 rounded-2xl overflow-hidden luxury-border">
+                        <img src="https://images.unsplash.com/photo-1465847899084-d164df4dedc6?q=80&w=800&auto=format&fit=crop" alt="안양천 피크닉" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Section 3: Brand Philosophy Showcase ("The Philosophy / 브랜드 스토리") -->
+    <section id="philosophy" class="py-36 relative bg-brand-dark overflow-hidden border-y border-brand-sand/10">
+        
+        <!-- Large Low-Opacity Typography Overlay -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap opacity-[0.03] select-none pointer-events-none font-cinzel text-[10vw] font-black text-brand-sand">
+            MUYAMU COMMUNITY
+        </div>
+
+        <div class="max-w-5xl mx-auto px-6 sm:px-8 relative z-10 text-center">
+            
+            <div class="w-16 h-16 rounded-full border border-brand-sand/40 flex items-center justify-center mx-auto mb-8 text-brand-sand">
+                <i class="fa-solid fa-quote-left text-lg"></i>
+            </div>
+
+            <h2 class="font-playfair text-2xl sm:text-4xl text-brand-beige leading-relaxed italic mb-8">
+                "경쟁이나 완벽함보다는,<br>
+                서로의 소리에 귀 기울이고 다정하게 응원하는 공간"
+            </h2>
+
+            <div class="w-20 h-[1px] bg-brand-sand/40 mx-auto mb-8"></div>
+
+            <p class="text-xs sm:text-sm text-brand-beige/70 font-sans leading-relaxed max-w-2xl mx-auto font-light tracking-wider mb-12">
+                무야무(MUYAMU)는 안양시 만안구와 안양천을 기반으로 활동합니다. 실력에 상관없이 누구든 자신만의 아티스트십을 발휘할 수 있도록 존중하며, 음악과 삶의 이야기를 나눕니다. 또한 환경을 돌보는 플로깅을 통해 선한 영향을 넓혀가고 있습니다.
+            </p>
+
+            <!-- Dual Image Composition -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
+                <div class="rounded-2xl overflow-hidden luxury-border h-64 shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?q=80&w=800&auto=format&fit=crop" alt="Piano" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700 filter brightness-90">
+                </div>
+                <div class="rounded-2xl overflow-hidden luxury-border h-64 shadow-2xl sm:translate-y-6">
+                    <img src="https://images.unsplash.com/photo-1445378330437-309c023b7537?q=80&w=800&auto=format&fit=crop" alt="Acoustic Sunset" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700 filter brightness-90">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Section 4: Sub-gatherings Collage Grid ("Gatherings / 소모임") -->
+    <section id="groups" class="py-28 bg-brand-black">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            
+            <div class="text-center mb-16">
+                <span class="text-[11px] font-cinzel tracking-[0.3em] uppercase text-brand-terracotta block mb-2">Lifestyle Gatherings</span>
+                <h2 class="font-cinzel text-3xl sm:text-4xl text-brand-beige">무야무 취향 소모임 방</h2>
+                <p class="text-xs text-brand-sand/70 font-sans tracking-widest mt-2">음악 너머 삶의 다채로운 가치를 함께 공유하는 모임</p>
+            </div>
+
+            <!-- Asymmetric Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Card 1: 숨차방 -->
+                <div class="luxury-glass p-6 rounded-2xl luxury-border flex flex-col justify-between hover:-translate-y-1 transition-transform">
+                    <div>
+                        <div class="text-2xl mb-4 text-brand-terracotta">🏃‍♂️</div>
+                        <span class="text-[10px] font-sans uppercase tracking-widest text-brand-sand">Health & Running</span>
+                        <h3 class="font-cinzel text-xl font-bold text-brand-beige mt-1 mb-3">무야무 숨차방</h3>
+                        <p class="text-xs text-brand-beige/70 font-sans leading-relaxed font-light">
+                            안양천 수변 산책로를 함께 달리며 체력을 키우고 활력을 충전하는 러닝 모임입니다.
+                        </p>
+                    </div>
+                    <div class="pt-6 border-t border-brand-sand/10 text-[10px] font-sans text-brand-sand">#안양천러닝 #건강</div>
+                </div>
+
+                <!-- Card 2: 독서여행 -->
+                <div class="luxury-glass p-6 rounded-2xl luxury-border flex flex-col justify-between hover:-translate-y-1 transition-transform">
+                    <div>
+                        <div class="text-2xl mb-4 text-brand-sand">📚</div>
+                        <span class="text-[10px] font-sans uppercase tracking-widest text-brand-sand">Reading & Discussion</span>
+                        <h3 class="font-cinzel text-xl font-bold text-brand-beige mt-1 mb-3">무야무 독서여행</h3>
+                        <p class="text-xs text-brand-beige/70 font-sans leading-relaxed font-light">
+                            한 권의 책과 인문학적 질문을 통해 깊은 생각과 다정한 대화를 나누는 정독 모임입니다.
+                        </p>
+                    </div>
+                    <div class="pt-6 border-t border-brand-sand/10 text-[10px] font-sans text-brand-sand">#인문학 #독서토론</div>
+                </div>
+
+                <!-- Card 3: 살림방 -->
+                <div class="luxury-glass p-6 rounded-2xl luxury-border flex flex-col justify-between hover:-translate-y-1 transition-transform">
+                    <div>
+                        <div class="text-2xl mb-4 text-emerald-400">🌿</div>
+                        <span class="text-[10px] font-sans uppercase tracking-widest text-brand-sand">Lifestyle & Wisdom</span>
+                        <h3 class="font-cinzel text-xl font-bold text-brand-beige mt-1 mb-3">무야무 살림방</h3>
+                        <p class="text-xs text-brand-beige/70 font-sans leading-relaxed font-light">
+                            지혜로운 재정 관리, 미니멀 라이프, 스마트한 생활 살림 팁을 나누는 실용 소모임입니다.
+                        </p>
+                    </div>
+                    <div class="pt-6 border-t border-brand-sand/10 text-[10px] font-sans text-brand-sand">#살림지혜 #재정</div>
+                </div>
+
+                <!-- Card 4: 수호자들방 -->
+                <div class="luxury-glass p-6 rounded-2xl luxury-border flex flex-col justify-between hover:-translate-y-1 transition-transform">
+                    <div>
+                        <div class="text-2xl mb-4 text-purple-400">🛡️</div>
+                        <span class="text-[10px] font-sans uppercase tracking-widest text-brand-sand">Supporters & Crew</span>
+                        <h3 class="font-cinzel text-xl font-bold text-brand-beige mt-1 mb-3">수호자들방</h3>
+                        <p class="text-xs text-brand-beige/70 font-sans leading-relaxed font-light">
+                            커뮤니티의 방향성을 다듬고 무대 기획 및 안내로 무야무를 지키는 운영 서포터즈 모임입니다.
+                        </p>
+                    </div>
+                    <div class="pt-6 border-t border-brand-sand/10 text-[10px] font-sans text-brand-sand">#운영진 #서포터즈</div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Section 5: Contact Us & RSVP ("Contact Us / 참여 안내") -->
+    <section id="contact" class="py-32 relative bg-brand-dark border-t border-brand-sand/10">
+        <div class="max-w-4xl mx-auto px-6 sm:px-8">
+            
+            <div class="luxury-glass p-8 sm:p-14 rounded-3xl luxury-border relative overflow-hidden">
+                <div class="text-center mb-10">
+                    <span class="text-[11px] font-cinzel tracking-[0.3em] uppercase text-brand-terracotta block mb-2">Membership Application</span>
+                    <h2 class="font-cinzel text-3xl sm:text-4xl text-brand-beige">무야무 멤버십 합류 신청</h2>
+                    <p class="text-xs text-brand-sand/80 font-sans tracking-widest mt-2">당신의 이야기를 음악과 함께 안양천에 띄워보세요.</p>
+                </div>
+
+                <!-- Registration Form -->
+                <form id="rsvp-form" class="space-y-5 font-sans" onsubmit="handleFormSubmit(event)">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div>
+                            <label for="form-name" class="block text-[10px] font-sans uppercase tracking-widest text-brand-sand mb-1.5">성함</label>
+                            <input type="text" id="form-name" required placeholder="홍길동" class="w-full px-4 py-3 rounded-xl bg-brand-black/80 border border-brand-sand/30 text-brand-beige text-xs placeholder-brand-beige/30 focus:outline-none focus:border-brand-terracotta transition-colors">
+                        </div>
+                        <div>
+                            <label for="form-phone" class="block text-[10px] font-sans uppercase tracking-widest text-brand-sand mb-1.5">연락처</label>
+                            <input type="tel" id="form-phone" required placeholder="010-1234-5678" class="w-full px-4 py-3 rounded-xl bg-brand-black/80 border border-brand-sand/30 text-brand-beige text-xs placeholder-brand-beige/30 focus:outline-none focus:border-brand-terracotta transition-colors">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="form-interest" class="block text-[10px] font-sans uppercase tracking-widest text-brand-sand mb-1.5">관심 참여 분야</label>
+                        <select id="form-interest" required class="w-full px-4 py-3 rounded-xl bg-brand-black/80 border border-brand-sand/30 text-brand-beige text-xs focus:outline-none focus:border-brand-terracotta transition-colors">
+                            <option value="" disabled selected class="text-slate-500">분야를 선택해주세요</option>
+                            <option value="소울스테이지" class="bg-brand-black">소울 스테이지 & 버스킹 (음악)</option>
+                            <option value="숨차방" class="bg-brand-black">무야무 숨차방 (러닝)</option>
+                            <option value="독서여행" class="bg-brand-black">무야무 독서여행 (독서)</option>
+                            <option value="살림방" class="bg-brand-black">무야무 살림방 (라이프스타일)</option>
+                            <option value="수호자들" class="bg-brand-black">수호자들방 (운영지원)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="form-msg" class="block text-[10px] font-sans uppercase tracking-widest text-brand-sand mb-1.5">한마디 (선택)</label>
+                        <textarea id="form-msg" rows="3" placeholder="소개나 바라는 점을 편하게 남겨주세요." class="w-full px-4 py-3 rounded-xl bg-brand-black/80 border border-brand-sand/30 text-brand-beige text-xs placeholder-brand-beige/30 focus:outline-none focus:border-brand-terracotta transition-colors resize-none"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 rounded-xl bg-brand-terracotta text-white font-sans text-xs uppercase tracking-[0.2em] font-semibold hover:bg-brand-terracottaHover transition-all pill-btn-glow mt-4">
+                        신청서 제출하기
+                    </button>
+                </form>
+
+                <!-- Success Confirmation Box -->
+                <div id="rsvp-success" class="hidden text-center py-12 space-y-4">
+                    <div class="w-16 h-16 border border-brand-terracotta rounded-full flex items-center justify-center text-brand-terracotta text-2xl mx-auto">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <h3 class="font-cinzel text-2xl text-brand-beige">신청이 정상적으로 완료되었습니다</h3>
+                    <p class="text-xs text-brand-sand font-sans max-w-sm mx-auto leading-relaxed">
+                        확인 후 안내 담당자가 문자로 모임 참여 및 오픈채팅방 링크를 전달드리겠습니다.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-black py-16 border-t border-brand-sand/15 text-brand-sand/70 font-sans text-xs">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex flex-col md:flex-row justify-between items-center gap-8">
+            
+            <div class="text-center md:text-left">
+                <span class="font-cinzel text-lg font-bold text-brand-beige tracking-[0.2em] block mb-1">MUYAMU COMMUNITY</span>
+                <p class="text-[11px] text-brand-sand/60">
+                    안양시 만안구 & 안양천 중심 시민 음악 커뮤니티 | 협력: 리얼트리뮤직 (Real Tree Music)
+                </p>
+            </div>
+
+            <div class="flex items-center gap-6">
+                <a href="https://witty-creek-25e.notion.site/1e2d00a6344349489d44b109b5ba0c2c?source=copy_link" target="_blank" rel="noopener noreferrer" class="hover:text-brand-terracotta transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-book text-xs"></i>
+                    <span>공식 노션 문서</span>
+                </a>
+                <a href="#contact" class="hover:text-brand-terracotta transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                    <span>문의하기</span>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="text-center text-[10px] text-brand-sand/40 mt-12 pt-6 border-t border-white/5">
+            &copy; 2026 MUYAMU Community. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- RSVP Modal (Opened from Nav Button) -->
+    <div id="rsvp-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="luxury-glass max-w-lg w-full p-8 rounded-3xl luxury-border relative">
+            <button onclick="closeModal()" class="absolute top-6 right-6 text-brand-sand hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="text-center mb-6">
+                <span class="font-cinzel text-xs text-brand-terracotta uppercase tracking-widest block mb-1">MUYAMU RSVP</span>
+                <h3 class="font-cinzel text-2xl text-brand-beige">입장 신청</h3>
+            </div>
+
+            <form onsubmit="handleModalSubmit(event)" class="space-y-4 font-sans">
+                <div>
+                    <label class="block text-[10px] uppercase text-brand-sand mb-1">성함</label>
+                    <input type="text" required class="w-full px-4 py-2.5 rounded-xl bg-brand-black border border-brand-sand/30 text-brand-beige text-xs focus:outline-none focus:border-brand-terracotta">
+                </div>
+                <div>
+                    <label class="block text-[10px] uppercase text-brand-sand mb-1">연락처</label>
+                    <input type="tel" required class="w-full px-4 py-2.5 rounded-xl bg-brand-black border border-brand-sand/30 text-brand-beige text-xs focus:outline-none focus:border-brand-terracotta">
+                </div>
+                <button type="submit" class="w-full py-3.5 rounded-xl bg-brand-terracotta text-white font-sans text-xs uppercase tracking-widest font-semibold hover:bg-brand-terracottaHover transition-all mt-2">
+                    신청하기
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Interactivity Script -->
+    <script>
+        // Slides Data
+        const slides = [
+            {
+                category: "Monthly Live",
+                title: "소울 스테이지 (Soul Stage)",
+                desc: "자신의 음악과 진솔한 이야기를 나눕니다. 관객과 연주자의 경계를 허물고, 서로의 완성을 다정하게 응원하는 무야무의 핵심 월간 프로그램입니다.",
+                img: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1200&auto=format&fit=crop",
+                loc: "만안구 무야무 라운지"
+            },
+            {
+                category: "Outdoor Special",
+                title: "노고전 헌정 버스킹",
+                desc: "5월과 10월, 안양천 바람과 함께 피어나는 감사의 테마 버스킹. 소중한 회원들의 수고를 다정하게 노고하며 연주를 전합니다.",
+                img: "https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80&w=1200&auto=format&fit=crop",
+                loc: "안양천 수변 무대"
+            },
+            {
+                category: "Seasonal Gathering",
+                title: "안양천 피크닉 버스킹",
+                desc: "계절별 돗자리를 펴고 나누는 자발적 어쿠스틱 연주회. 음악 연주 후 안양천을 함께 Clean-up하는 플로깅 가치를 더합니다.",
+                img: "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?q=80&w=1200&auto=format&fit=crop",
+                loc: "안양천 수변공원"
+            }
+        ];
+
+        let currentSlide = 0;
+
+        function updateSlide() {
+            const slide = slides[currentSlide];
+            document.getElementById('slide-category').innerText = slide.category;
+            document.getElementById('slide-title').innerText = slide.title;
+            document.getElementById('slide-desc').innerText = slide.desc;
+            document.getElementById('slide-img').src = slide.img;
+            document.getElementById('slide-loc').innerText = slide.loc;
+            document.getElementById('slide-count').innerText = `0${currentSlide + 1} / 0${slides.length}`;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateSlide();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            updateSlide();
+        }
+
+        // Mobile Menu Toggle
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Form Submit
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            document.getElementById('rsvp-form').classList.add('hidden');
+            document.getElementById('rsvp-success').classList.remove('hidden');
+        }
+
+        // Modal Controls
+        function openModal() {
+            document.getElementById('rsvp-modal').classList.remove('hidden');
+            document.getElementById('rsvp-modal').classList.add('flex');
+        }
+        function closeModal() {
+            document.getElementById('rsvp-modal').classList.add('hidden');
+            document.getElementById('rsvp-modal').classList.remove('flex');
+        }
+        function handleModalSubmit(e) {
+            e.preventDefault();
+            alert('입장 신청이 정상 접수되었습니다. 담당자가 문자로 전달드리겠습니다.');
+            closeModal();
+        }
+    </script>
+</body>
+</html>
